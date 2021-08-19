@@ -1,6 +1,6 @@
 from django.db import models
 from django_countries.fields import CountryField
-
+from django.utils import timezone
 
 class resume_details(models.Model):
     #Personal info
@@ -42,3 +42,11 @@ class resume_details(models.Model):
     #     if self.refrence_id == "":
     #         self.refrence_id = uuid.uuid4().hex[:11]
     #     super().save(*args, **kwargs)
+
+class message(models.Model):
+    sender = models.CharField(max_length = 250)
+    message_recieved = models.TextField()
+    date_recieved = models.DateTimeField(default=timezone.now, blank=True)
+
+    def __str__(self):
+        return self.sender

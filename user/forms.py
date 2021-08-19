@@ -1,5 +1,5 @@
 from django import forms
-from .models import resume_details
+from .models import resume_details,message
 from django.core.exceptions import ValidationError
 
 
@@ -29,3 +29,10 @@ class updateResumeForm(forms.ModelForm):
         model = resume_details
         fields = "__all__"
         # exclude = ['refrence_id']
+
+
+class messageForm(forms.ModelForm):
+
+    class Meta:
+        model = message
+        exclude = ['date_recieved']

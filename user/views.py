@@ -1,10 +1,22 @@
 from django.shortcuts import render,redirect
 from .models import resume_details
-from .forms import createResumeForm,updateResumeForm
+from .forms import createResumeForm,updateResumeForm,messageForm
 from django.contrib import messages
 import uuid
 from urllib.parse import urlencode
 
+
+def message(request):
+    if request.method == 'POST':
+        form = messageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Message sent successfully. It will be attended to as soon as possible")
+            return redirect('message')
+        else:
+            print(form)
+            return render(request, 'index.html', {'form':form})
+    return render(request, 'index.html')
 
 def signup(request):
 
