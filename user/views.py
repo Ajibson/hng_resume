@@ -27,7 +27,7 @@ def signup(request):
             resume_form.reference_id = uuid.uuid4().hex[:11]
             resume_form.save()
             messages.success(request, f"Resume created successfully, Your reference ID is {resume_form.reference_id}")
-            return redirect("signup")
+            return redirect("resume")
         else:
             return render(request, 'signup.html', {'form': form})
 
@@ -47,10 +47,10 @@ def edit_resume(request):
                 form_save.reference_id = user.reference_id
                 form_save.save()
                 messages.success(request, 'Details updated successfully')
-                return redirect("signup")
+                return redirect("resume")
             else:
                 return render(request, 'edit_resume.html', {'resume':user,'form': form})
         return render(request, 'edit_resume.html', {'resume':user})
     except resume_details.DoesNotExist:
         messages.error(request, "Your resume can't be found, Please create one")
-        return redirect('signup')
+        return redirect('resume')
